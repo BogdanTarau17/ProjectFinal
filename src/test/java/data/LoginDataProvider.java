@@ -1,11 +1,11 @@
-package dataProviders;
+package data;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.exceptions.CsvException;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
-import objectModels.LoginModel;
+import POJO.LoginModel;
 import org.testng.annotations.DataProvider;
 import utils.CSVUtils;
 import utils.DatabaseUtils;
@@ -62,45 +62,23 @@ public class LoginDataProvider {
         return unmarshaller.unmarshal(f);
     }
 
-    /* ####################################################### CSV DATA PROVIDER ##########################################  */
-
-    @DataProvider(name = "loginCSVDataProvider")
-    public Iterator<Object[]> loginCSVDataProvider() throws JAXBException, IOException, CsvException {
-        Collection<Object[]> dp = new ArrayList<>();
-//      here we will map json to LoginModel
-        List<String[]> csvData = CSVUtils.readCsv("src/test/resources/testData/testDataInput.csv");
-
-        int usernameIndex = 0, passwordIndex = 1, loginErrIndex = 2;
-
-//        starting from 1 because we have header with legend
-        for (int i = 1; i < csvData.size(); i++) {
-            String[] line = csvData.get(i);
-            LoginModel loginModel = new LoginModel(line[usernameIndex], line[passwordIndex], line[loginErrIndex]);
-            dp.add(new Object[]{loginModel});
-        }
-
-        return dp.iterator();
+    @DataProvider
+    public Object[][] loginDataProviderSuccessfully() {
+        return new Object[][]{
+                // username, password, browser
+                {"IOnel@yah", "IOnel@", "chrome"},
+                // {"IOnel@yahoo.com", "inc", "chrome"}
+        };
     }
 
-    /* ####################################################### SQL DATA PROVIDER ##########################################  */
+    @DataProvider
+    public Object[][] loginDataProviderFail() {
+        return new Object[][]{
+                {"IOnel@yah", "111", "chrome"},
+        };
 
-    @DataProvider(name = "loginSQLDataProvider")
-    public Iterator<Object[]> loginSQLDataProvider() throws JAXBException, IOException, CsvException, SQLException {
-        Collection<Object[]> dp = new ArrayList<>();
-        DatabaseUtils databaseUtils = new DatabaseUtils();
-//     connect to DB and get data
-        Connection connection = databaseUtils.connect();
-        Statement statement = databaseUtils.getStatement(connection);
 
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM login");
-
-        while (resultSet.next()) {
-            LoginModel loginModel = new LoginModel(databaseUtils.getElementFromDB(resultSet, "username"),
-                    databaseUtils.getElementFromDB(resultSet, "password"),
-                    databaseUtils.getElementFromDB(resultSet, "loginError"));
-            dp.add(new Object[]{loginModel});
-        }
-
-        return dp.iterator();
     }
+
 }
+

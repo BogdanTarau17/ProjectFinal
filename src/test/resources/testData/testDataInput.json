@@ -1,0 +1,16 @@
+[
+  {
+      "account": {
+        "username": "IOnel@yom",
+        "password": "123"
+      },
+      "loginErr": "Invalid username or password!"
+    },
+  {
+    "account": {
+      "username": "IOnel@yahoo.com",
+      "password": "IOnel@"
+    },
+    "loginErr": ""
+  }
+]

@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 public class ConfigUtils {
-    //    readGenericElementFromConfig method reads the property value from the config file
     public static String readGenericElementFromConfig(String configFile, String propertyName, String defaultValue) {
         String elementValue = defaultValue;
         try {
@@ -19,7 +18,6 @@ public class ConfigUtils {
         }
         return elementValue;
     }
-
     public static String readGenericElementFromConfig(String configFile, String propertyName) {
         return readGenericElementFromConfig(configFile, propertyName, "");
     }
