@@ -23,8 +23,9 @@ public class HovePage extends BasePage {
 
     Actions actions;
 
-    public HovePage(WebDriver driver) {
+    public HovePage(List<WebElement> dropDownOptions, WebDriver driver) {
         super(driver);
+        this.dropDownOptions = dropDownOptions;
         PageFactory.initElements(driver, this);
         actions = new Actions(driver);
     }

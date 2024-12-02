@@ -6,6 +6,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginTest extends BaseTest{
 
 
@@ -19,13 +21,15 @@ public class LoginTest extends BaseTest{
         System.out.println("Verify login successful");
         Assert.assertTrue(loginPage.verifyLoginSuccessful(username));
     }
+
+
     @Test (dataProvider = "loginDataProviderFail", dataProviderClass = LoginDataProvider.class)
     public void testLoginFailed (String username, String password, String browser) {
         getBrowser(browser);
         getBaseURL();
         navigateToURL("account/login");
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login(username, password);
+        loginPage.loginFailed(username, password);
         System.out.println("Verify login fail");
         Assert.assertTrue(loginPage.verifyLoginFailed(username));
     }

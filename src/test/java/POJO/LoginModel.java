@@ -15,14 +15,14 @@ public class LoginModel {
         this.account = new AccountModel(username, password);
         this.loginErr = loginErr;
     }
-//    @XmlElement
-//    public void setAccount(AccountModel account) {
-//        this.account = account;
-//    }
-//    @XmlElement
-//    public void setLoginErr(String loginErr) {
-//        this.loginErr = loginErr;
-//    }
+    @XmlElement
+    public void setAccount(AccountModel account) {
+        this.account = account;
+    }
+    @XmlElement
+    public void setLoginErr(String loginErr) {
+        this.loginErr = loginErr;
+    }
     @Override
     public String toString() {
         return "LoginModel value: {\n" +

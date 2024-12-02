@@ -66,16 +66,17 @@ public class LoginDataProvider {
     public Object[][] loginDataProviderSuccessfully() {
         return new Object[][]{
                 // username, password, browser
-                {"IOnel@yah", "IOnel@", "chrome"},
+                {"IOnel@yahoo.com", "IOnel@", "edge"},
                 // {"IOnel@yahoo.com", "inc", "chrome"}
         };
     }
 
     @DataProvider
     public Object[][] loginDataProviderFail() {
-        return new Object[][]{
-                {"IOnel@yah", "111", "chrome"},
+        Object[][] objects = {
+                {"IOnel@yahoo.com", "1234566", "edge"},
         };
+        return objects;
 
 
     }

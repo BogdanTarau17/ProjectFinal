@@ -1,0 +1,9 @@
+<loginModel>
+    <account>
+        <firstName>Bogdan</firstName>
+        <lastName>Daniel</lastName>
+        <email>daniel@mail.com</email>
+        <password> </password>
+    </account>
+    <loginErr>Parolă nu poate fi necompletat</loginErr>
+</loginModel>

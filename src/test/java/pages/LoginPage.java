@@ -10,14 +10,23 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"customer_login\"]/div[4]/div[1]/div/button")
     private WebElement signInButton;
-    @FindBy(xpath= "//*[@id=\"loginInputName\"]")
+
+    @FindBy(id= "loginInputName")
     private WebElement emailInput;
-    @FindBy(xpath = "//*[@id=\"loginInputEmail\"]")
+
+    @FindBy(id = "loginInputEmail")
     private WebElement passwordInput;
-    @FindBy(xpath = "//h2[contains(text(),'LOG IN')]")
+
+    @FindBy(id = "login")
     private WebElement pageIdentifier;
-    @FindBy(xpath = "//*[@id=\"customer_login\"]/div[1]/div")
+
+    @FindBy(xpath = "//*[@id=\"customer_login\"]/div[1]/div/ul/li/text()")
     private WebElement errorMessageElement;
+
+    @FindBy(xpath = "//*[@id=\"login\"]/h2")
+    private WebElement loginText;
+
+
     public LoginPage(WebDriver driver, WebElement pageIdentifier) {
         super(driver);
         this.pageIdentifier = pageIdentifier;
@@ -26,7 +35,7 @@ public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
-
+        PageFactory.initElements(driver, this);
     }
 
     public void login(String username, String password) {
@@ -35,6 +44,14 @@ public class LoginPage extends BasePage {
         this.enterUsername(username);
         this.enterPassword(password);
         this.submit();
+    }
+    public void loginFailed(String username, String password){
+        System.out.println("Waiting for login page to load");
+        waitUntilElementVisible(pageIdentifier);
+        this.enterUsername(username);
+        this.enterPassword(password);
+        this.submit();
+        loginText.click();
     }
     public void enterUsername(String username) {
         waitUntilElementVisible(emailInput);
@@ -58,7 +75,6 @@ public class LoginPage extends BasePage {
 
     public boolean verifyLoginSuccessful(String username) {
         String xpath = "//*[@id=\"tt-pageContent\"]/div/div/h1";
-
         WebElement welcomeMessage = waitUntilElementVisible(By.xpath(xpath));
         System.out.println("Welcome message displayed: " + welcomeMessage.getText());
         return welcomeMessage.isDisplayed();
