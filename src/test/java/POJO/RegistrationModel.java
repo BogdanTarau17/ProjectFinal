@@ -13,14 +13,18 @@ public class RegistrationModel {
     private String lastName;
     private String email;
     private String password;
+    private String registrationErr;
 
-    public RegistrationModel(String firstName, String lastName, String email, String password) {
+    public RegistrationModel() {
+    }
+
+    public RegistrationModel(String firstName, String lastName, String email, String password, String registrationErr) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.registrationErr = registrationErr;
     }
-
 
     @XmlElement
     public void setFirstName(String firstName) {

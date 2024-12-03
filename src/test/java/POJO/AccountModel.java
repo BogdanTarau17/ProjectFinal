@@ -7,6 +7,7 @@ import lombok.Getter;
 public class AccountModel {
     private String username;
     private String password;
+
     public AccountModel() {
     }
     public AccountModel(String username, String password) {

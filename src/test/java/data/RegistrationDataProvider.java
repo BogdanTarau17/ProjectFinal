@@ -26,22 +26,17 @@ public class RegistrationDataProvider {
         };
     }
 
-    @DataProvider(name = "registerXMLDataProvider")
-    public Iterator<Object[]> registerXMLDataProvider() throws JAXBException {
+    @DataProvider(name = "registrationJsonDataProvider")
+    public Iterator<Object[]> registrationJsonDataProvider() throws IOException {
         Collection<Object[]> dp = new ArrayList<>();
-        File xmlFile = new File("src/test/resources/testData/testDataInput.xml");
-        RegistrationModel registrationModel = (RegistrationModel) unMarshalObjectModel(xmlFile, LoginModel.class);
-        dp.add(new Object[]{registrationModel});
+        File jsonFile = new File("src/test/resources/testData/testDataInput.json");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        RegistrationModel[] registrationModelList = objectMapper.readValue(jsonFile, RegistrationModel[].class);
+
+        for (RegistrationModel lm : registrationModelList) {
+            dp.add(new Object[]{lm});
+        }
         return dp.iterator();
-    }
-
-    private Object unMarshalObjectModel(File f, Class<?>... classesToBeBound) throws JAXBException {
-        this.f = f;
-        this.classesToBeBound = classesToBeBound;
-        JAXBContext jaxbContext = JAXBContext.newInstance(classesToBeBound);
-
-//        loading xml and mapped based on tags added on LoginModel and AccountModel
-        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        return unmarshaller.unmarshal(f);
     }
 }

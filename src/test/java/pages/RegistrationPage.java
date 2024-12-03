@@ -74,7 +74,7 @@ public class RegistrationPage extends BasePage {
         System.out.println("Create");
         createButton.click();
     }
-    public boolean verifyRegistrationSuccessful(String username) {
+    public boolean verifyRegistrationSuccessful(String title) {
         String xpath = "//*[@id=\"tt-pageContent\"]/div/div/h1";
 
         WebElement welcomeMessage = waitUntilElementVisible(By.xpath(xpath));

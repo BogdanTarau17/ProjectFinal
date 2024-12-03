@@ -40,41 +40,19 @@ public class LoginDataProvider {
         return dp.iterator();
     }
 
-    /* ####################################################### XML DATA PROVIDER ##########################################  */
-    @DataProvider(name = "loginXMLDataProvider")
-    public Iterator<Object[]> loginXMLDataProvider() throws JAXBException {
-        Collection<Object[]> dp = new ArrayList<>();
-//      here we will map json to LoginModel
-        File xmlFile = new File("src/test/resources/testData/testDataInput.xml");
-
-        LoginModel loginModel = (LoginModel) unMarshalObjectModel(xmlFile, LoginModel.class);
-
-//       adding to data provider
-        dp.add(new Object[]{loginModel});
-        return dp.iterator();
-    }
-
-    private Object unMarshalObjectModel(File f, Class<?>... classesToBeBound) throws JAXBException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(classesToBeBound);
-
-//        loading xml and mapped based on tags added on LoginModel and AccountModel
-        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        return unmarshaller.unmarshal(f);
-    }
-
     @DataProvider
     public Object[][] loginDataProviderSuccessfully() {
         return new Object[][]{
                 // username, password, browser
                 {"IOnel@yahoo.com", "IOnel@", "edge"},
-                // {"IOnel@yahoo.com", "inc", "chrome"}
+                 {"IOnel@yahoo.com", "ionellll", "chrome"}
         };
     }
 
     @DataProvider
     public Object[][] loginDataProviderFail() {
         Object[][] objects = {
-                {"IOnel@yahoo.com", "1234566", "edge"},
+                {"IOnel@yahoo.com", "1234566", "chrome"},
         };
         return objects;
 

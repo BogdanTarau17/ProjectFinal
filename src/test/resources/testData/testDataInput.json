@@ -1,16 +1,20 @@
 [
   {
-      "account": {
-        "username": "IOnel@yom",
-        "password": "123"
+      "Registration": {
+        "firstname": "robert",
+        "lastname": "radu",
+        "email": "robi@yahoo.com",
+        "password": "123456"
       },
-      "loginErr": "Invalid username or password!"
+      "registrationErr": ""
     },
   {
-    "account": {
-      "username": "IOnel@yahoo.com",
-      "password": "IOnel@"
+    "Registration": {
+      "firstname": "robert",
+      "lastname": "radu",
+      "email": "robi@yahoo.com",
+      "password": ""
     },
-    "loginErr": ""
+    "registrationErr": "Parolă nu poate fi necompletat"
   }
 ]

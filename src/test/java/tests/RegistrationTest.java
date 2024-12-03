@@ -21,22 +21,25 @@ public class RegistrationTest extends BaseTest{
         Assert.assertTrue(isRegistrationSuccessful, "Registration was not successful.");
 
     }
-    @Test(dataProvider = "registerXMLDataProvider", dataProviderClass = RegistrationDataProvider.class)
-    public void testRegistrationWithMissingPassword(RegistrationModel registrationData) {
-        getBrowser();
-        getBaseURL();
-        navigateToURL("account/register");
-        RegistrationPage registrationPage = new RegistrationPage(driver);
-        registrationPage.register(
-                registrationData.getFirstName(),
-                registrationData.getLastName(),
-                registrationData.getEmail(),
-                registrationData.getPassword()
-        );
-        System.out.println("Registration is not complete");
-        boolean isErrorDisplayed = registrationPage.verifyRegistrationFailed("Parolă nu poate fi necompletat");
-        Assert.assertTrue(isErrorDisplayed, "Error message not displayed.");
+    @Test(dataProvider = "registrationJsonDataProvider", dataProviderClass = RegistrationDataProvider.class)
+    public void registerWithJsonAsDataSource(RegistrationModel registrationModel) {
+        registerWithJsonAsDataSource(registrationModel);
+}
+protected void registerWithRegistrationModel(RegistrationModel registrationModel){
+    setUp();
+    navigateToURL("account/register");
+    RegistrationPage registrationPage = new RegistrationPage(driver);
+    System.out.println(registrationModel);
+    registrationPage.register(registrationModel.getFirstName(), registrationModel.getLastName(), registrationModel.getEmail(),registrationModel.getPassword());
+
+    if (registrationModel.getRegistrationErr().isEmpty()) {
+        System.out.println("Verify login successful");
+        Assert.assertTrue(registrationPage.verifyRegistrationSuccessful(registrationModel.getFirstName()));
+    } else {
+        System.out.println("Verify login failed with message: " + registrationModel.getRegistrationErr());
+        Assert.assertTrue(registrationPage.verifyRegistrationFailed(registrationModel.getRegistrationErr()));
     }
+}
 }
 
 
