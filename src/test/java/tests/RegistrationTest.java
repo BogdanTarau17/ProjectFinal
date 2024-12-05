@@ -1,7 +1,6 @@
 package tests;
 
 import POJO.RegistrationModel;
-import data.LoginDataProvider;
 import data.RegistrationDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -22,21 +21,18 @@ public class RegistrationTest extends BaseTest{
 
     }
     @Test(dataProvider = "registrationJsonDataProvider", dataProviderClass = RegistrationDataProvider.class)
-    public void registerWithJsonAsDataSource(RegistrationModel registrationModel) {
-        registerWithJsonAsDataSource(registrationModel);
-}
-protected void registerWithRegistrationModel(RegistrationModel registrationModel){
-    setUp();
+    public void registerFailedRegistration(RegistrationModel registrationModel) throws InterruptedException {
+        setUp();
     navigateToURL("account/register");
     RegistrationPage registrationPage = new RegistrationPage(driver);
     System.out.println(registrationModel);
     registrationPage.register(registrationModel.getFirstName(), registrationModel.getLastName(), registrationModel.getEmail(),registrationModel.getPassword());
-
+        Thread.sleep(60000);
     if (registrationModel.getRegistrationErr().isEmpty()) {
-        System.out.println("Verify login successful");
+        System.out.println("Verify register successful");
         Assert.assertTrue(registrationPage.verifyRegistrationSuccessful(registrationModel.getFirstName()));
     } else {
-        System.out.println("Verify login failed with message: " + registrationModel.getRegistrationErr());
+        System.out.println("Verify register failed with message: " + registrationModel.getRegistrationErr());
         Assert.assertTrue(registrationPage.verifyRegistrationFailed(registrationModel.getRegistrationErr()));
     }
 }

@@ -1,6 +1,5 @@
 package tests;
 
-import org.checkerframework.checker.units.qual.A;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -53,7 +52,7 @@ public class BaseTest {
 
     @AfterTest
     public void cleanUp() {
-        closeBrowserAtEnd();
+       closeBrowserAtEnd();
     }
 
     @AfterMethod

@@ -22,24 +22,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class LoginDataProvider {
-
-    /* ####################################################### JSON DATA PROVIDER ##########################################  */
-
-    @DataProvider(name = "loginJsonDataProvider")
-    public Iterator<Object[]> loginJsonDataProvider() throws IOException {
-        Collection<Object[]> dp = new ArrayList<>();
-//      here we will map json to LoginModel
-        File jsonFile = new File("src/test/resources/testData/testDataInput.json");
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        LoginModel[] loginModelList = objectMapper.readValue(jsonFile, LoginModel[].class);
-
-        for (LoginModel lm : loginModelList)
-            dp.add(new Object[]{lm});
-
-        return dp.iterator();
-    }
-
     @DataProvider
     public Object[][] loginDataProviderSuccessfully() {
         return new Object[][]{
@@ -48,16 +30,27 @@ public class LoginDataProvider {
                  {"IOnel@yahoo.com", "ionellll", "chrome"}
         };
     }
-
     @DataProvider
     public Object[][] loginDataProviderFail() {
         Object[][] objects = {
                 {"IOnel@yahoo.com", "1234566", "chrome"},
         };
         return objects;
-
-
     }
-
+    @DataProvider(name = "loginSQLDataProvider")
+    public Iterator<Object[]> loginSQLDataProvider() throws JAXBException, IOException, CsvException, SQLException {
+        Collection<Object[]> dp = new ArrayList<>();
+        DatabaseUtils databaseUtils = new DatabaseUtils();
+        Connection connection = databaseUtils.connect();
+        Statement statement = databaseUtils.getStatement(connection);
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM login");
+        while (resultSet.next()) {
+            LoginModel loginModel = new LoginModel(databaseUtils.getElementFromDB(resultSet, "username"),
+                    databaseUtils.getElementFromDB(resultSet, "password"),
+                    databaseUtils.getElementFromDB(resultSet, "loginError"));
+            dp.add(new Object[]{loginModel});
+        }
+        return dp.iterator();
+    }
 }
 

@@ -1,11 +1,7 @@
 package data;
 
-import POJO.LoginModel;
 import POJO.RegistrationModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Unmarshaller;
 import org.testng.annotations.DataProvider;
 
 import java.io.File;
@@ -29,7 +25,7 @@ public class RegistrationDataProvider {
     @DataProvider(name = "registrationJsonDataProvider")
     public Iterator<Object[]> registrationJsonDataProvider() throws IOException {
         Collection<Object[]> dp = new ArrayList<>();
-        File jsonFile = new File("src/test/resources/testData/testDataInput.json");
+        File jsonFile = new File("src/test/resources/testData/registrationTestDataInput.json");
 
         ObjectMapper objectMapper = new ObjectMapper();
         RegistrationModel[] registrationModelList = objectMapper.readValue(jsonFile, RegistrationModel[].class);

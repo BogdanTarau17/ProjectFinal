@@ -1,6 +1,5 @@
 package POJO;
 
-import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 
@@ -13,14 +12,6 @@ public class LoginModel {
     }
     public LoginModel(String username, String password, String loginErr) {
         this.account = new AccountModel(username, password);
-        this.loginErr = loginErr;
-    }
-    @XmlElement
-    public void setAccount(AccountModel account) {
-        this.account = account;
-    }
-    @XmlElement
-    public void setLoginErr(String loginErr) {
         this.loginErr = loginErr;
     }
     @Override

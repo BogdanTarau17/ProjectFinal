@@ -1,8 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,6 +23,12 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//*[@id=\"login\"]/h2")
     private WebElement loginText;
+
+    @FindBy(xpath = "//*[@id=\"shopify-section-header-template\"]/header/div[3]/div/div/div[3]/div[3]/div/button")
+    private WebElement myAccount;
+
+    @FindBy(xpath = "//*[@id=\"shopify-section-header-template\"]/header/div[3]/div/div/div[3]/div[3]/div/div/div[2]/ul/li[2]/a/i")
+    private WebElement logOutOption;
 
 
     public LoginPage(WebDriver driver, WebElement pageIdentifier) {
@@ -50,7 +54,7 @@ public class LoginPage extends BasePage {
         waitUntilElementVisible(pageIdentifier);
         this.enterUsername(username);
         this.enterPassword(password);
-        this.submit();
+        driver.findElement(By.id("loginInputName")).sendKeys(Keys.ENTER);
         loginText.click();
     }
     public void enterUsername(String username) {
@@ -85,5 +89,27 @@ public class LoginPage extends BasePage {
         System.out.println("Error message displayed: " + errorMessageElement.getText());
         return errorMessageElement.getText().equalsIgnoreCase(errorMessage);
     }
+    public void openMyAccount(){
+        waitUntilElementVisible(myAccount);
+        System.out.println("Open My account menu");
+        myAccount.click();
 
+    }
+
+    public void logout(){
+        waitUntilElementVisible(logOutOption);
+        System.out.println("Logout");
+        logOutOption.click();
+    }
+
+    public boolean verifyLogoutSuccessful() {
+        try{
+        boolean isVisible = waitUntilElementVisible(By.xpath("//*[@id=\"tt-pageContent\"]/div/div/h1")).isDisplayed();
+            System.out.println("Logout successful");
+            return isVisible;
+        } catch (Exception e) {
+            System.err.println("Logout verification failed: " + e.getMessage());
+            return false;
+        }
+    }
 }
