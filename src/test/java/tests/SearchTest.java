@@ -32,10 +32,14 @@ public class SearchTest extends BaseTest{
         Assert.assertTrue(isSearchSuccessful, "Search was not successful for input: " + searchModel.getSearchInput());
     }
     @Test(dataProvider = "searchNonexistingProducts", dataProviderClass = SearchDataProvider.class)
-    public void testInvalidSearch(SearchModel searchModel){
-        getBrowser();
-        getBaseURL();
+    public void testInvalidSearch(String item, String browser){
+        setUp();
+        driver.navigate().to(baseURL);
         SearchPage searchPage = new SearchPage(driver);
+        boolean invalidSearch =searchPage.invalidSearch(item, browser);
+        System.out.println("Text is displayed for invalid search");
+        Assert.assertTrue(invalidSearch,
+                "Expected 'No results found' message was not displayed for search item: " + item);
 
     }
 }

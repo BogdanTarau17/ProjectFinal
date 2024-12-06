@@ -13,11 +13,9 @@ public class LoginTest extends BaseTest{
      {
         setUp();
         navigateToURL("account/login");
-
         LoginPage loginPage = new LoginPage(driver);
         System.out.println(loginModel);
         loginPage.login(loginModel.getAccount().getUsername(), loginModel.getAccount().getPassword());
-
         if (loginModel.getLoginErr().isEmpty()) {
             System.out.println("Verify login successful");
             Assert.assertTrue(loginPage.verifyLoginSuccessful(loginModel.getAccount().getUsername()));
@@ -34,7 +32,6 @@ public class LoginTest extends BaseTest{
         getBrowser(browser);
         getBaseURL();
         navigateToURL("account/login");
-
         LoginPage loginPage = new LoginPage(driver);
         loginPage.loginFailed(username, password);
         System.out.println("Verify login fail");

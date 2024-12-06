@@ -25,7 +25,7 @@ public class SearchDataProvider {
     @DataProvider
     public Object[][] searchNonexistingProducts() {
         return new Object[][]{
-                { "Craciun", "edge"},
+                { "GZHT" , "chrome"},
 
         };
     }

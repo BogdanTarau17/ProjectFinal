@@ -17,9 +17,11 @@ public class SearchPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"shopify-section-template--23764489306487__main\"]/div/div/h1/span")
     private WebElement successfulGeneralSearch;
 
-    @FindBy(xpath = "//*[@id=\"shopify-section-template--23764489306487__main\"]/div/div/span\n" +
-            "//div[contains(text(),'NU RESTINE REZULTATE')]")
+    @FindBy(xpath = "//*[@id=\"shopify-section-template--23764489306487__main\"]/div/div/span")
     private static WebElement invalidSearch;
+
+    @FindBy(xpath = "//*[@id=\"shopify-section-template--23764489306487__main\"]/div/div/span")
+    private static WebElement noResultsMessage;
 
     @FindBy( xpath = "//*[@id=\"shopify-section-header-template\"]/header/div[3]/div/div/div[1]/a")
     private static WebElement pageIdentifier;
@@ -66,7 +68,7 @@ public class SearchPage extends BasePage {
     }
 
 
-    public boolean invalidSearch(String searchContent) {
+    public boolean invalidSearch(String searchContent, String browser) {
         waitUntilElementVisible(searchButton);
         System.out.println("Click on the Search button");
         searchButton.click();
@@ -74,9 +76,13 @@ public class SearchPage extends BasePage {
         searchInput.clear();
         searchInput.sendKeys(searchContent);
         searchInput.sendKeys(Keys.ENTER);
-        waitUntilElementVisible(successfulGeneralSearch);
+        waitUntilElementVisible(noResultsMessage);
         System.out.println("Search input: " + searchContent);
-        return successfulGeneralSearch.isDisplayed();
+        return noResultsMessage.isDisplayed();
+    }
+    public boolean isNoResultsMessageDisplayed() {
+        waitUntilElementVisible(noResultsMessage);
+        return noResultsMessage.isDisplayed();
     }
 
 
