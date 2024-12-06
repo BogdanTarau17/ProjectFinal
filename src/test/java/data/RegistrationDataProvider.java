@@ -18,7 +18,6 @@ public class RegistrationDataProvider {
     public Object[][] registrationDataProvider() {
         return new Object[][]{
                 {"Ion", "Vasile", "Ionel21@yahoo.com", "Ion123", "chrome"},
-                //{"", "incorrect", "chrome"}
         };
     }
 

@@ -25,8 +25,6 @@ public class LoginTest extends BaseTest{
         }
     }
     
-    
-
     @Test (dataProvider = "loginDataProviderFail", dataProviderClass = LoginDataProvider.class)
     public void testLoginFailed (String username, String password, String browser) {
         getBrowser(browser);

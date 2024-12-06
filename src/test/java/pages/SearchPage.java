@@ -26,7 +26,6 @@ public class SearchPage extends BasePage {
     @FindBy( xpath = "//*[@id=\"shopify-section-header-template\"]/header/div[3]/div/div/div[1]/a")
     private static WebElement pageIdentifier;
 
-
     public SearchPage(WebDriver driver, WebElement searchButton, WebElement searchInput) {
         super(driver);
         this.searchButton = searchButton;
@@ -34,19 +33,15 @@ public class SearchPage extends BasePage {
         this.invalidSearch = invalidSearch;
 
     }
-
     public SearchPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
-
     public void searchButtonIsDisplayed(){
         waitUntilElementVisible(searchButton);
         System.out.println("Click on the Search button");
         searchButton.click();
-
     }
-
     public void searchInputIsDisplayed(){
         waitUntilElementVisible(searchInput);
         System.out.println("Insert your data ");
@@ -66,8 +61,6 @@ public class SearchPage extends BasePage {
         System.out.println("Search input: " + searchContent);
         return successfulGeneralSearch.isDisplayed();
     }
-
-
     public boolean invalidSearch(String searchContent, String browser) {
         waitUntilElementVisible(searchButton);
         System.out.println("Click on the Search button");

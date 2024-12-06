@@ -39,19 +39,16 @@ public class BasePage {
     }
 
     public void acceptAlert(Alert alert) {
-        //Press the OK button from alert
         alert.accept();
     }
 
     public void acceptAlert(Alert alert, String response) {
-        //enter response on prompt alert
         alert.sendKeys(response);
-        //Press the OK button from alert
         alert.accept();
     }
 
     public void cancelAlert(Alert alert) {
-        //Press the OCancel button from alert
+
         alert.dismiss();
     }
 

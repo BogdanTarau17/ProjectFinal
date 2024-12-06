@@ -29,19 +29,15 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//*[@id=\"shopify-section-header-template\"]/header/div[3]/div/div/div[3]/div[3]/div/div/div[2]/ul/li[2]/a/i")
     private WebElement logOutOption;
-
-
     public LoginPage(WebDriver driver, WebElement pageIdentifier) {
         super(driver);
         this.pageIdentifier = pageIdentifier;
         PageFactory.initElements(driver, this);
     }
-
     public LoginPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
-
     public void login(String username, String password) {
         System.out.println("Waiting for login page to load");
         waitUntilElementVisible(pageIdentifier);
@@ -63,27 +59,23 @@ public class LoginPage extends BasePage {
         emailInput.clear();
         emailInput.sendKeys(username);
     }
-
     public void enterPassword(String password) {
         waitUntilElementVisible(passwordInput);
         System.out.println("Enter password:" + password);
         passwordInput.clear();
         passwordInput.sendKeys(password);
     }
-
     public void submit() {
         wait.until(ExpectedConditions.elementToBeClickable(signInButton));
         System.out.println("Log in");
         signInButton.click();
     }
-
     public boolean verifyLoginSuccessful(String username) {
         String xpath = "//*[@id=\"tt-pageContent\"]/div/div/h1";
         WebElement welcomeMessage = waitUntilElementVisible(By.xpath(xpath));
         System.out.println("Welcome message displayed: " + welcomeMessage.getText());
         return welcomeMessage.isDisplayed();
     }
-
     public boolean verifyLoginFailed(String errorMessage) {
         waitUntilElementVisible(errorMessageElement);
         System.out.println("Error message displayed: " + errorMessageElement.getText());
@@ -95,13 +87,11 @@ public class LoginPage extends BasePage {
         myAccount.click();
 
     }
-
     public void logout(){
         waitUntilElementVisible(logOutOption);
         System.out.println("Logout");
         logOutOption.click();
     }
-
     public boolean verifyLogoutSuccessful() {
         try{
         boolean isVisible = waitUntilElementVisible(By.xpath("//*[@id=\"tt-pageContent\"]/div/div/h1")).isDisplayed();

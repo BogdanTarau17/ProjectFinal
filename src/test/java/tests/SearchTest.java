@@ -8,19 +8,6 @@ import pages.SearchPage;
 
 public class SearchTest extends BaseTest{
 
-//    @Test(dataProvider = "loginJsonDataProvider", dataProviderClass = SearchDataProvider.class)
-//    public void testSuccessfulLoginSearch(SearchModel searchModel) {
-//       setUp();
-//        navigateToURL(baseURL);
-//        SearchPage searchPage = new SearchPage(driver);
-//        System.out.println(searchModel);
-//        searchPage.searchSuccessful(searchModel.getSearchInput());
-//        System.out.println("Searching");
-//
-//
-//
-//    }
-
     @Test(dataProvider = "searchTestDataInput", dataProviderClass = SearchDataProvider.class)
     public void testSuccessfulSearch(SearchModel searchModel) {
         setUp();
@@ -37,9 +24,9 @@ public class SearchTest extends BaseTest{
         driver.navigate().to(baseURL);
         SearchPage searchPage = new SearchPage(driver);
         boolean invalidSearch =searchPage.invalidSearch(item, browser);
-        System.out.println("Text is displayed for invalid search");
+        System.out.println("Message CĂUTAREA DVS. NU RESTINE REZULTATE is displayed for invalid search");
         Assert.assertTrue(invalidSearch,
-                "Expected 'No results found' message was not displayed for search item: " + item);
+                " 'CĂUTAREA DVS. NU RESTINE REZULTATE' message was not displayed for search item: " + item);
 
     }
 }

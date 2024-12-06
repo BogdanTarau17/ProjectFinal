@@ -30,12 +30,10 @@ public class RegistrationPage extends BasePage {
         this.lastNameInput = lastNameInput;
         this.pageIdentifier = pageIdentifier;
     }
-
     public RegistrationPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
-
     public void register(String firstName, String lastName, String email, String password) {
         System.out.println("Waiting for login page to load");
         waitUntilElementVisible(pageIdentifier);
@@ -81,7 +79,6 @@ public class RegistrationPage extends BasePage {
         System.out.println("Welcome message displayed: " + welcomeMessage.getText());
         return welcomeMessage.isDisplayed();
     }
-
     public boolean verifyRegistrationFailed(String errorMessage) {
         waitUntilElementVisible(errorMessageElement);
         System.out.println("Error message displayed: " + errorMessageElement.getText());

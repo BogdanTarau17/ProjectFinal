@@ -18,7 +18,6 @@ public class RegistrationTest extends BaseTest{
         System.out.println("Verify registration successful");
         boolean isRegistrationSuccessful = registrationPage.verifyRegistrationSuccessful(firstName);
         Assert.assertTrue(isRegistrationSuccessful, "Registration was not successful.");
-
     }
     @Test(dataProvider = "registrationJsonDataProvider", dataProviderClass = RegistrationDataProvider.class)
     public void registerFailedRegistration(RegistrationModel registrationModel) throws InterruptedException {
